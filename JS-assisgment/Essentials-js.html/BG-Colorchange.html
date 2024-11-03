@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #7FFFD4;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #66c2b2;
+}
+
+#colorCode {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="changeColor()">Change BG Color</button>
+        <p id="colorCode">#532187</p>
+    </div>
+</body>
+</html>
+
+<script>
+    function changeColor() {
+
+    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+    
+    document.body.style.backgroundColor = randomColor;
+
+    
+    document.getElementById("colorCode").innerText = randomColor;
+}
+
+</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1E90FF;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.converter-box {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    background-color: #1E90FF;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1C86EE;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="converter-box">
+            <h1>Currency Converter</h1>
+            <input type="number" id="amount" placeholder="Enter Amount" />
+            
+            <div class="currency-selection">
+                <label>From</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="INR">INR</option>
+            
+                </select>
+
+                <label>To</label>
+                <select id="toCurrency">
+                    <option value="INR">INR</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    
+                </select>
+            </div>
+
+            <button onclick="convertCurrency()">Get Exchange Rate</button>
+
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+   async function convertCurrency() {
+    const amount = document.getElementById("amount").value;
+    const fromCurrency = document.getElementById("fromCurrency").value;
+    const toCurrency = document.getElementById("toCurrency").value;
+    const resultElement = document.getElementById("result");
+
+    if (amount === "") {
+        resultElement.innerHTML = "Please enter an amount";
+        return;
+    }
+
+    const apiKey = "country-list.js";  
+
+
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch exchange rate");
+        const data = await response.json();
+
+        const convertedAmount = data.conversion_result.toFixed(2);
+        resultElement.innerHTML = "${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}";
+    } catch (error) {
+        resultElement.innerHTML = "Error: " + error.message;
+    }
+}
+</script>

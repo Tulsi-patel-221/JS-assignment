@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    font-size: 18px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #333;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Export HTML Table to Excel</h1>
+        <table id="dataTable">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Alice</td>
+                <td>30</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>25</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>Charlie</td>
+                <td>35</td>
+                <td>Canada</td>
+            </tr>
+        </table>
+        <button onclick="exportTableToExcel('dataTable')">Export to Excel</button>
+    </div>
+</body>
+</html>
+
+<script>
+    function exportTableToExcel(tableID, filename = 'table_data.xlsx') {
+    let downloadLink;
+    const dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8';
+    const tableSelect = document.getElementById(tableID);
+    const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+
+    downloadLink = document.createElement("a");
+
+
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    downloadLink.download = filename;
+
+
+    downloadLink.click();
+}
+</script>

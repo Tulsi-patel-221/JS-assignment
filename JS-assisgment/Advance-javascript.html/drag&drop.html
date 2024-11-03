@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 200px;
+            height: 300px;
+            border: 2px dashed #ccc;
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px;
+            vertical-align: top;
+        }
+        .draggable {
+            width: 100px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            margin: 10px 0;
+            cursor: move;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container1">
+        <div class="draggable" draggable="true" id="drag1">Drag me 1</div>
+        <div class="draggable" draggable="true" id="drag2">Drag me 2</div>
+    </div>
+    
+    <div class="container" id="container2">
+        <div class="draggable" draggable="true" id="drag3">Drag me 3</div>
+    </div>
+</body>
+</html>
+
+<script>
+     const draggables = document.querySelectorAll('.draggable');
+    const containers = document.querySelectorAll('.container');
+
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    containers.forEach(container => {
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            container.appendChild(dragging);
+        });
+    });
+</script>

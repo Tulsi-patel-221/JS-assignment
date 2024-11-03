@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.main {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #000;
+    width: 300px;
+}
+
+input[type="number"] {
+    width: 100px;
+    padding: 5px;
+    margin-top: 5px;
+    
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ans{
+    padding: 20px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="content">
+        <h2 >Maths Operations</h2>
+        </div>
+        <div class="main-1">
+            Enter 1st number:<input type="number" placeholder="" class="place place-1" value="" id="one"><br><br>
+            Enter 2nd number:<input type="number" placeholder="" class="place" value="" id="two">
+
+        </div>
+        <div class="main-2">
+            <div class="buttan">
+                <button  onclick="Add()">+</button>
+                <button onclick="remove()">-</button>
+                <button  onclick="multiplication ()">*</button><br>
+                <button  onclick=" qaz()">/</button>
+                <button  onclick="qaza()">%</button>
+            </div>
+            <div class="ans">
+                 Answer is : <input type="text" name="" id="result" value="">
+            </div>
+        </div>
+    </div>
+    <script>
+           function Add(){
+        var val1 = document.getElementById("one").value
+        var val2 = document.getElementById("two").value
+        var sum = +val1 + +val2
+        document.getElementById("result").value = sum
+    }
+    function remove(){
+        var  val1 = document.getElementById("one").value
+        var val2 = document.getElementById("two").value
+        var sum = +val1 - +val2
+        document.getElementById("result").value = sum
+    }
+    function  multiplication (){
+        var  val1 = document.getElementById("one").value
+        var val2 = document.getElementById("two").value
+        var sum = +val1 * +val2
+        // document.write(sum)
+        document.getElementById("result").value = sum
+    }
+    function  qaz(){
+        var  val1 = document.getElementById("one").value
+        var val2 = document.getElementById("two").value
+        var sum = +val1 / +val2
+        // document.write(sum)
+        document.getElementById("result").value = sum
+    }
+    function  qaza(){
+        var  val1 = document.getElementById("one").value
+        var val2 = document.getElementById("two").value
+        var sum = +val1 % +val2
+        
+        document.getElementById("result").value = sum
+    }
+    </script>
+</body>
+</html>

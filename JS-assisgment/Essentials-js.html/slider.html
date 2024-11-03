@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.slider-container {
+    text-align: center;
+    color: #ddd;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    border-radius: 10px;
+}
+
+.nav {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
+
+button:focus {
+    outline: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <h2>Simple JavaScript Slider</h2>
+        <p>Created by Dropinks</p>
+        <div class="slider">
+            <button class="nav left" onclick="prevSlide()">&#9664;</button>
+            <div class="slides">
+                <div class="slide" style="background-color: #FFD700;"></div>
+                <div class="slide" style="background-color: #FF4500;"></div>
+                <div class="slide" style="background-color: #6A5ACD;"></div>
+                <div class="slide" style="background-color: #32CD32;"></div>
+                <div class="slide" style="background-color: #1E90FF;"></div>
+            </div>
+            <button class="nav right" onclick="nextSlide()">&#9654;</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    const offset = -currentSlide * 120; 
+    slides.style.transform = `translateX(${offset}px)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+</script>

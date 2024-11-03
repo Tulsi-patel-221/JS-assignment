@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e7f0f8;
+}
+
+.container {
+    text-align: left;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #34a853;
+    margin-bottom: 20px;
+}
+
+.email-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.email-container input {
+    width: 300px;
+    padding: 10px;
+    padding-right: 40px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.email-container input:focus {
+    border-color: #34a853;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    font-size: 1.2rem;
+}
+
+.invalid-icon {
+    color: #e53e3e;
+}
+
+.valid-icon {
+    color: #34a853;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Validation<br>JavaScript</h1>
+        <div class="email-container">
+            <input type="text" id="email" placeholder="Enter your email" oninput="validateEmail()">
+            <span id="icon" class="icon"></span>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    function validateEmail() {
+    const emailInput = document.getElementById("email");
+    const icon = document.getElementById("icon");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (emailPattern.test(emailInput.value)) {
+        icon.innerHTML = "✔️";
+        icon.classList.add("valid-icon");
+        icon.classList.remove("invalid-icon");
+    } else {
+        icon.innerHTML = "❌";
+        icon.classList.add("invalid-icon");
+        icon.classList.remove("valid-icon");
+    }
+}
+
+</script>

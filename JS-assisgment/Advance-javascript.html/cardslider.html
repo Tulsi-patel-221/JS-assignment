@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.slider-container {
+    width: 80%;
+    max-width: 1000px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.card {
+    flex: 0 0 33.33%;
+    max-width: 300px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+}
+
+.card-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.card-content h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #0066ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0052cc;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    font-size: 24px;
+    color: #0066ff;
+    user-select: none;
+}
+
+.prev:hover, .next:hover {
+    color: #0052cc;
+}
+
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="card">
+                <div class="card-image">
+                    <img src="img3.jpg" alt="David Dell">
+                </div>
+                <div class="card-content">
+                    <h3>David Dell</h3>
+                    <p>The lorem text the section contain contains header having open and close functionality.</p>
+                    <button>View More</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <img src="img2.jpg" alt="Rose Bush">
+                </div>
+                <div class="card-content">
+                    <h3>Rose Bush</h3>
+                    <p>The lorem text the section contain contains header having open and close functionality.</p>
+                    <button>View More</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <img src="img1.jpg" alt="Jones Gail">
+                </div>
+                <div class="card-content">
+                    <h3>Jones Gail</h3>
+                    <p>The lorem text the section contain contains header having open and close functionality.</p>
+                    <button>View More</button>
+                </div>
+            </div>
+        </div>
+        <div class="navigation">
+            <span class="prev" onclick="slidePrev()">&#10094;</span>
+            <span class="next" onclick="slideNext()">&#10095;</span>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    let currentIndex = 0;
+
+function updateSliderPosition() {
+    const slider = document.querySelector('.slider');
+    const cardWidth = document.querySelector('.card').offsetWidth + 20;
+    slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+}
+
+function slideNext() {
+    const totalCards = document.querySelectorAll('.card').length;
+    if (currentIndex < totalCards - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;  
+    }
+    updateSliderPosition();
+}
+
+function slidePrev() {
+    const totalCards = document.querySelectorAll('.card').length;
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = totalCards - 1;  
+    }
+    updateSliderPosition();
+}
+
+
+window.addEventListener('resize', updateSliderPosition);
+
+</script>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #4ca2f5;
+}
+
+.alarm-clock {
+    text-align: center;
+    color: white;
+}
+
+.clock {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 350px;
+}
+
+.clock img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+#current-time {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #333;
+}
+
+select, button {
+    padding: 8px;
+    font-size: 14px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4ca2f5;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3a8bd1;
+}
+
+    </style>
+</head>
+<body>
+    <div class="alarm-clock">
+        <h1>Build An Alarm Clock JavaScript</h1>
+        <div class="clock">
+            <img src="clock.jpg" >
+            <div id="current-time">00:00:00 AM</div>
+            <select id="hours">
+                <option value="Hours">Hours</option>
+                
+            </select>
+            <select id="minutes">
+                <option value="Minute">Minute</option>
+            
+            </select>
+            <select id="ampm">
+                <option value="AM/PM">AM/PM</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+            <button onclick="setAlarm()">Set Alarm</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    
+function updateCurrentTime() {
+    const timeElement = document.getElementById("current-time");
+    const now = new Date();
+    const hours = now.getHours() % 12 || 12;
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const seconds = now.getSeconds().toString().padStart(2, "0");
+    const ampm = now.getHours() >= 12 ? "PM" : "AM";
+    timeElement.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+}
+
+
+function populateDropdowns() {
+    const hoursDropdown = document.getElementById("hours");
+    const minutesDropdown = document.getElementById("minutes");
+
+    for (let i = 1; i <= 12; i++) {
+        const hourOption = document.createElement("option");
+        hourOption.value = i;
+        hourOption.textContent = i;
+        hoursDropdown.appendChild(hourOption);
+    }
+
+    for (let i = 0; i < 60; i++) {
+        const minuteOption = document.createElement("option");
+        minuteOption.value = i;
+        minuteOption.textContent = i.toString().padStart(2, "0");
+        minutesDropdown.appendChild(minuteOption);
+    }
+}
+
+
+let alarmTime = null;
+function setAlarm() {
+    const hours = document.getElementById("hours").value;
+    const minutes = document.getElementById("minutes").value;
+    const ampm = document.getElementById("ampm").value;
+    if (hours === "Hours" || minutes === "Minute" || ampm === "AM/PM") {
+        alert("Please select a valid time.");
+        return;
+    }
+    alarmTime = `${hours}:${minutes} ${ampm}`;
+    alert(`Alarm set for ${alarmTime}`);
+}
+
+
+function checkAlarm() {
+    const now = new Date();
+    const hours = now.getHours() % 12 || 12;
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const ampm = now.getHours() >= 12 ? "PM" : "AM";
+    const currentTime = `${hours}:${minutes} ${ampm}`;
+    
+    if (alarmTime === currentTime) {
+        alert("Alarm ringing!");
+        alarmTime = null;  
+    }
+}
+
+
+setInterval(updateCurrentTime, 1000);
+setInterval(checkAlarm, 1000);
+populateDropdowns();
+
+</script>
